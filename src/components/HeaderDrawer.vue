@@ -61,6 +61,12 @@ export default defineComponent({
     return {
       authLinks: [
         {
+          title: "Catalog",
+          caption: "Everything MTG!",
+          icon: "menu_book",
+          link: "/#/catalog",
+        },
+        {
           title: "Sign Out",
           caption: "Sign out of the app",
           icon: "logout",

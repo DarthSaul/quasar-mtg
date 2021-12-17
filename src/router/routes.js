@@ -19,6 +19,16 @@ const routes = [
     component: () => import("layouts/Auth.vue"),
     children: [{ path: "", component: () => import("pages/Logout.vue") }],
   },
+  {
+    path: "/catalog",
+    component: () => import("layouts/Catalog.vue"),
+    children: [
+      { path: "", component: () => import("pages/catalog/Index.vue") },
+      { path: "cards", component: () => import("pages/catalog/Cards.vue") },
+      { path: "sets", component: () => import("pages/catalog/Sets.vue") },
+      { path: "types", component: () => import("pages/catalog/Types.vue") },
+    ],
+  },
 
   // Always leave this as last one,
   // but you can also remove it
