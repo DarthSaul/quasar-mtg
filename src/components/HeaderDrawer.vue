@@ -21,11 +21,20 @@
     <q-list>
       <q-item-label header> Essential Links </q-item-label>
 
-      <EssentialLink
-        v-for="link in essentialLinks"
-        :key="link.title"
-        v-bind="link"
-      />
+      <template v-if="authenticated">
+        <EssentialLink
+          v-for="link in authLinks"
+          :key="link.title"
+          v-bind="link"
+        />
+      </template>
+      <template v-else>
+        <EssentialLink
+          v-for="link in noAuthLinks"
+          :key="link.title"
+          v-bind="link"
+        />
+      </template>
     </q-list>
   </q-drawer>
 </template>
@@ -33,42 +42,45 @@
 <script>
 import EssentialLink from "components/EssentialLink.vue";
 
-const linksList = [
-  {
-    title: "Register",
-    caption: "Let's get started!",
-    icon: "account_circle",
-    link: "/#/register",
-  },
-  {
-    title: "Login",
-    caption: "Login to the app",
-    icon: "login",
-    link: "/#/login",
-  },
-
-  {
-    title: "Discord Chat Channel",
-    caption: "chat.quasar.dev",
-    icon: "chat",
-    link: "https://chat.quasar.dev",
-  },
-];
-
 import { defineComponent, ref } from "vue";
+import { mapState } from "vuex";
 
 export default defineComponent({
   name: "MainLayout",
-
   components: {
     EssentialLink,
   },
-
+  computed: {
+    ...mapState("app/", {
+      authenticated: (state) => state.authenticated,
+    }),
+  },
   setup() {
     const leftDrawerOpen = ref(false);
 
     return {
-      essentialLinks: linksList,
+      authLinks: [
+        {
+          title: "Sign Out",
+          caption: "Sign out of the app",
+          icon: "logout",
+          link: "/#/signout",
+        },
+      ],
+      noAuthLinks: [
+        {
+          title: "Register",
+          caption: "Let's get started!",
+          icon: "account_circle",
+          link: "/#/register",
+        },
+        {
+          title: "Login",
+          caption: "Login to the app",
+          icon: "login",
+          link: "/#/login",
+        },
+      ],
       leftDrawerOpen,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
