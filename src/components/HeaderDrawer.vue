@@ -1,6 +1,6 @@
 <template>
   <q-header elevated>
-    <q-toolbar class="bg-secondary text-black">
+    <q-toolbar class="bg-secondary text-black q-py-md">
       <q-btn
         flat
         dense
@@ -11,7 +11,7 @@
         @click="toggleLeftDrawer"
       />
 
-      <q-toolbar-title> Quasar App </q-toolbar-title>
+      <q-toolbar-title> Quasar MTG App </q-toolbar-title>
 
       <div>Quasar v{{ $q.version }}</div>
     </q-toolbar>
